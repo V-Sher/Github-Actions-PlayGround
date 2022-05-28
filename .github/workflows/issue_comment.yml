@@ -3,6 +3,7 @@
 name: Displaying commenter's name under every comment made on an issue
 
 on:
+  workflow_dispatch:
   issues:
     types: [opened]
 
