@@ -15,7 +15,6 @@ jobs:
     steps:
       - name: Step 1 - Dumping Github Event Payload
         run: |
-          echo "Here's the entire Github context for the issue comment created."
           echo " ${{ toJSON(github.event) }}" | jq
         shell: bash
       - name: Finished checking out the payload
