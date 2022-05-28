@@ -1,0 +1,25 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Displaying commenter's name under every comment made on an issue
+
+on:
+  issues:
+    types: [opened]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  Comment:
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - name: Step 1 - Dumping Github Event Payload
+        run: |
+          echo "Here's the entire Github context for the issue comment created."
+          echo " ${{ toJSON(github.events) }}" | jq
+        shell: bash
+      - name: Finished checking out the payload
+        run: echo "Thank you. That's all"
+        shell: bash
+
+       
