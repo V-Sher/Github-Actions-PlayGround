@@ -5,7 +5,7 @@ name: Displaying commenter's name under every comment made on an issue
 on:
   workflow_dispatch:
   issues:
-    types: [opened]
+    types: [opened, edited, deleted]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
