@@ -23,7 +23,7 @@ jobs:
       - name: Step 2 - Using prewritten Checkout actions to load repo
         uses: actions/checkout@v2
       - name: Step 3 - Using prewritten Checkout actions to print repo name
-        run: echo "The {{ github.repository }} has been added to the runner"
+        run: echo "The ${{ github.repository }} has been added to the runner"
         shell: bash
        
   Bye:
