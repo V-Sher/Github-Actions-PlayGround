@@ -16,7 +16,7 @@ jobs:
     steps:
       - name: Step 1 - Dumping Github Event Payload
         run: |
-          echo " ${{ toJSON(github.event) }}" | jq
+          echo '${{ toJSON(github.event) }}' | jq
         shell: bash
       - name: Finished checking out the payload
         run: echo "Thank you. That's all"
