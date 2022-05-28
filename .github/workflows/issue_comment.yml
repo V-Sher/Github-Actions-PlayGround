@@ -18,7 +18,7 @@ jobs:
         run: echo '${{ toJSON(github.event) }}' | jq
         shell: bash
       - name: "Finished checking out the payload"
-        run: echo 'Thank you. That's all'
+        run: echo 'Thank you. Thats all.'
         shell: bash
 
        
