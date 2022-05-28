@@ -15,8 +15,7 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - name: Step 1 - Dumping Github Event Payload
-        run: |
-          echo '${{ toJSON(github.event) }}' | jq
+        run: echo '${{ toJSON(github.event) }}' | jq
         shell: bash
       - name: Finished checking out the payload
         run: echo "Thank you. That's all"
