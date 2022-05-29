@@ -33,18 +33,18 @@ jobs:
             [1]: https://github.com/peter-evans/create-or-update-comment
           reactions: '+1'
 
-#       - name: "Create a comment on newly edited Issue title"
-#         if: ${{ github.event.action }} == 'edited'
-#         uses: peter-evans/create-or-update-comment@v2
-#         with:
-#           issue-number: ${{ github.event.issue.number }}
-#           body: |
-#             Thanks **@${{ github.event.issue.user.login }}** for editing this issue. We will take a look into it ASAP.
-#             - Please make sure the title is descriptive. :sparkles:
-#             - Credits: Created by [create-or-update-comment][1]
+      - name: "Create a comment on newly edited Issue title"
+        if: ${{ github.event.action == 'edited'}}
+        uses: peter-evans/create-or-update-comment@v2
+        with:
+          issue-number: ${{ github.event.issue.number }}
+          body: |
+            Thanks **@${{ github.event.issue.user.login }}** for editing this issue. We will take a look into it ASAP.
+            - Please make sure the title is descriptive. :sparkles:
+            - Credits: Created by [create-or-update-comment][1]
 
-#             [1]: https://github.com/peter-evans/create-or-update-comment
-#           reactions: '+1'
+            [1]: https://github.com/peter-evans/create-or-update-comment
+          reactions: '+1'
 
       - name: "Finished checking out the payload"
         run: echo 'Thank you. Thats all.'
