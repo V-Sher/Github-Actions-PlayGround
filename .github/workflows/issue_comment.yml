@@ -20,13 +20,25 @@ jobs:
       - name: "Step 2 - Print Issue Creator Name"
         run: echo '${{ github.event.issue.user.login }}'
         shell: bash
-      - name: "Create a comment on newly edited Issue title"
+      - name: "Create a comment on newly opened Issue"
         uses: peter-evans/create-or-update-comment@v2
         with:
           issue-number: ${{ github.event.issue.number }}
           body: |
             Thanks **@${{ github.event.issue.user.login }}** for opening this issue. We will take a look into it ASAP.
             - Please make sure enough details are provided. :sparkles:
+            - Credits: Created by [create-or-update-comment][1]
+
+            [1]: https://github.com/peter-evans/create-or-update-comment
+          reactions: '+1'
+        if: ${{ github.event.action }} == 'opened'
+      - name: "Create a comment on newly edited Issue title"
+        uses: peter-evans/create-or-update-comment@v2
+        with:
+          issue-number: ${{ github.event.issue.number }}
+          body: |
+            Thanks **@${{ github.event.issue.user.login }}** for editing this issue. We will take a look into it ASAP.
+            - Please make sure the title is descriptive. :sparkles:
             - Credits: Created by [create-or-update-comment][1]
 
             [1]: https://github.com/peter-evans/create-or-update-comment
