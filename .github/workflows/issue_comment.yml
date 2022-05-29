@@ -20,7 +20,7 @@ jobs:
       - name: "Step 2 - Print Issue Creator Name"
         run: echo '${{ github.event.issue.user.login }}'
         shell: bash
-      - name: "Create a comment on Issue"
+      - name: "Create a comment on newly edited Issue title"
         uses: peter-evans/create-or-update-comment@v2
         with:
           issue-number: ${{ github.event.issue.number }}
@@ -31,6 +31,7 @@ jobs:
 
             [1]: https://github.com/peter-evans/create-or-update-comment
           reactions: '+1'
+        if: ${{ github.event.action }} == 'edited'
       - name: "Finished checking out the payload"
         run: echo 'Thank you. Thats all.'
         shell: bash
