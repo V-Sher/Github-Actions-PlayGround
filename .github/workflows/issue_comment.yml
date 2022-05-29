@@ -17,8 +17,8 @@ jobs:
       - name: "Step 1 - Dumping Github Event Payload"
         run: echo '${{ toJSON(github.event) }}' | jq
         shell: bash
-      - name: "Step 2 - Print Issue Creator Name"
-        run: echo '${{ github.event.issue.user.login }}'
+      - name: "Step 2 - Print type of event - open vs edit"
+        run: echo $(expr ${{ github.event.action }} = 'edited')
         shell: bash
       - name: "Create a comment on newly opened Issue"
         if: ${{ github.event.action }} == 'opened'
