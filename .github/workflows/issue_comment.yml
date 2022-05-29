@@ -18,14 +18,14 @@ jobs:
         run: echo '${{ toJSON(github.event) }}' | jq
         shell: bash
       - name: "Step 2 - Print Issue Creator Name"
-        run: echo '${{ toJSON(github.event.user) }}'
+        run: echo '${{ github.event.issue.user.login }}'
         shell: bash
       - name: "Create a comment on Issue"
         uses: peter-evans/create-or-update-comment@v2
         with:
           issue-number: ${{ github.event.issue.number }}
           body: |
-            Thanks ${{ github.event.user.login }} for opening this issue. We will take a look into it ASAP.
+            Thanks ${{ github.event.issue.user.login }} for opening this issue. We will take a look into it ASAP.
             - Please make sure enough details are provided. :sparkles:
             - Credits: Created by [create-or-update-comment][1]
 
