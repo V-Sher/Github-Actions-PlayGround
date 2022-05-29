@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Displaying commenter's name under every comment made on an issue
+name: Displaying commenter's name under new issue
 
 on:
   workflow_dispatch:
@@ -22,9 +22,9 @@ jobs:
         with:
           issue-number: ${{ github.event.issue.number }}
           body: |
-            Thanks for opening this Issue. We will take a look into it ASAP.
+            Thanks ${{ github.event.user.login }} for opening this issue. We will take a look into it ASAP.
             - Please make sure enough details are provided. :sparkles:
-            - Created by [create-or-update-comment][1]
+            - Credits: Created by [create-or-update-comment][1]
 
             [1]: https://github.com/peter-evans/create-or-update-comment
           reactions: '+1'
