@@ -25,7 +25,7 @@ jobs:
         with:
           issue-number: ${{ github.event.issue.number }}
           body: |
-            Thanks ${{ github.event.issue.user.login }} for opening this issue. We will take a look into it ASAP.
+            Thanks **@${{ github.event.issue.user.login }}** for opening this issue. We will take a look into it ASAP.
             - Please make sure enough details are provided. :sparkles:
             - Credits: Created by [create-or-update-comment][1]
 
