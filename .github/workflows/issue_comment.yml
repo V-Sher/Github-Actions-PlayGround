@@ -18,7 +18,7 @@ jobs:
         run: echo '${{ toJSON(github.event) }}' | jq
         shell: bash
       - name: "Step 2 - Print Issue Creator Name"
-        run: echo '${{ github.event.user.login }}'
+        run: echo '${{ toJSON(github.event.user) }}'
         shell: bash
       - name: "Create a comment on Issue"
         uses: peter-evans/create-or-update-comment@v2
