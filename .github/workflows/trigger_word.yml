@@ -7,7 +7,7 @@ on:
     
 jobs:
   Trigger:
-    runs-on: ubuntu
+    runs-on: ubuntu-latest
     steps:
       - name: "Dump Github Event Payload"
         shell: bash
