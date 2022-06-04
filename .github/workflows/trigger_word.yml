@@ -1,0 +1,14 @@
+name: Testing Trigger Words
+
+on:
+  workflow_dispatch:
+  issue_comment:
+    types: [created, edited, deleted]
+    
+jobs:
+  Trigger:
+    runs-on: ubuntu
+    steps:
+      - name: "Dump Github Event Payload"
+        shell: bash
+        run: echo '${{ toJSON(github.event) }}' | jq
