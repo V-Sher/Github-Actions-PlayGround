@@ -46,11 +46,16 @@ jobs:
       - name: "Check to see wandb output..."
         run: echo '${{ toJSON(steps.wandb) }}'
         shell: bash
+        
+      - name: Copy Repository Contents
+        uses: actions/checkout@master
 
       - name: create deployment
         if: steps.wandb.outputs.BOOL_SINGLE_RUN
         run: |
-          curl -d "{\"ref\": \"$BRANCH_NAME\", \"payload\": {\"wandb_run_id\": \"$RUN_ID\"}}" -H "Authorization: token $TOKEN" https://api.github.com/repos/$GITHUB_REPOSITORY/deployments
+          pip3 install requests
+          python3 action_files/create_deployment.py
+          # curl -d "{\"ref\": \"$BRANCH_NAME\", \"payload\": {\"wandb_run_id\": \"$RUN_ID\"}}" -H "Authorization: token $TOKEN" https://api.github.com/repos/$GITHUB_REPOSITORY/deployments
         env:
           RUN_ID: ${{ steps.deploy_chatops.outputs.TRAILING_TOKEN }}
           BRANCH_NAME: ${{ steps.deploy_chatops.outputs.BRANCH_NAME }}
