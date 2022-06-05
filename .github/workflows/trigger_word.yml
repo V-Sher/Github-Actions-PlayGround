@@ -40,7 +40,7 @@ jobs:
         uses: machine-learning-apps/wandb-action@master
         with:
           PROJECT_NAME: "vsher/huggingface"
-          RUN_ID: ${{ steps.deploy_chatops.outputs.TRAILING_TOKEN }}
+          RUN_ID: ${{ steps.chatops.outputs.TRAILING_TOKEN }}
           WANDB_API_KEY: ${{ secrets.WANDB_API_KEY }}
           DEBUG: 'true'
       - name: "Check to see wandb output..."
@@ -57,9 +57,9 @@ jobs:
           python3 action_files/create_deployment.py
           # curl -d "{\"ref\": \"$BRANCH_NAME\", \"payload\": {\"wandb_run_id\": \"$RUN_ID\"}}" -H "Authorization: token $TOKEN" https://api.github.com/repos/$GITHUB_REPOSITORY/deployments
         env:
-          RUN_ID: ${{ steps.deploy_chatops.outputs.TRAILING_TOKEN }}
-          BRANCH_NAME: ${{ steps.deploy_chatops.outputs.BRANCH_NAME }}
-          TOKEN: ${{ steps.deploy_chatops.outputs.APP_INSTALLATION_TOKEN }}
+          RUN_ID: ${{ steps.chatops.outputs.TRAILING_TOKEN }}
+          BRANCH_NAME: ${{ steps.chatops.outputs.BRANCH_NAME }}
+          TOKEN: ${{ steps.chatops.outputs.APP_INSTALLATION_TOKEN }}
         
 #   WandB: 
 #     runs-on: ubuntu-latest
