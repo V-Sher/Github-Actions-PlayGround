@@ -40,7 +40,7 @@ jobs:
         uses: machine-learning-apps/wandb-action@master
         with:
           PROJECT_NAME: "vsher/huggingface"
-          RUN_ID: '12xgacf7'
+          RUN_ID: ${{ steps.deploy_chatops.outputs.TRAILING_TOKEN }}
           WANDB_API_KEY: ${{ secrets.WANDB_API_KEY }}
           DEBUG: 'true'
       - name: "Check to see wandb output..."
