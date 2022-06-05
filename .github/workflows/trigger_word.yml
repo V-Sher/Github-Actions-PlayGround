@@ -36,14 +36,15 @@ jobs:
       - name: "Print info"
         run: echo '${{ toJSON(steps.chatops) }}'
       - name: "Get Runs Using SHA"
+        id: wandb
         uses: machine-learning-apps/wandb-action@master
         with:
           PROJECT_NAME: "vsher/huggingface"
           RUN_ID: "12xgacf7"
           WANDB_API_KEY: ${{ secrets.WANDB_API_KEY }}
           DEBUG: 'true'
-      - name: "Check to see csv created..."
-        run: echo '${{ env.GITHUB_WORKSPACE }}'
+      - name: "Check to see wandb output..."
+        run: echo '${{ toJSON(steps.wandb) }}'
         shell: bash
         
 #   WandB: 
