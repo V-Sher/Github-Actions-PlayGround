@@ -15,6 +15,9 @@ jobs:
       - name: "Dump Github Event Payload"
         shell: bash
         run: echo '${{ toJSON(github.event) }}' | jq
+      - name: "Check github.ref"
+        shell: bash
+        run: echo '${{ toJSON(github.ref) }}' | jq
       - name: "Check trigger word present or not"
         if: contains(github.event.comment.body, '/my-trigger-word')
         uses: peter-evans/create-or-update-comment@v2
