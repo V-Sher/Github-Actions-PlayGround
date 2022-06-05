@@ -23,4 +23,16 @@ jobs:
           body: |
             Thanks **@${{ github.event.issue.user.login }}** for commenting on this issue. We have detected your trigger word.
           reactions: '+1'
+  WandB:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Get the latest SHA for the PR that was commented on"
+        id: chatops
+        uses: machine-learning-apps/actions-chatops@master
+        with:
+          TRIGGER_PHRASE: "/get-runs"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: "Print info"
+        run: echo '${{ steps.chatops }}'
 
