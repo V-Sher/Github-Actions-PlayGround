@@ -43,7 +43,7 @@ jobs:
           WANDB_API_KEY: ${{ secrets.WANDB_API_KEY }}
           DEBUG: 'true'
       - name: "Check to see csv created..."
-        run: ls ${{ env.GITHUB_WORKSPACE }}
+        run: echo '${{ env.GITHUB_WORKSPACE }}'
         shell: bash
         
 #   WandB: 
