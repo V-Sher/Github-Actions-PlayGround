@@ -43,9 +43,8 @@ jobs:
           WANDB_API_KEY: ${{ secrets.WANDB_API_KEY }}
           DEBUG: 'true'
       - name: "Check to see csv created..."
-        run: |
-          echo "🖥️ The Github Workspace is $GITHUB_WORKSPACE ."
-          ls ${{ github.workspace }}
+        run: ls ${{ github.workspace }}
+        shell: bash
         
 #   WandB: 
 #     runs-on: ubuntu-latest
