@@ -51,7 +51,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: wandb_report
-          path: wandb_report.csv
+          path: ./wandb_report.csv
         
 #       - name: Copy Repository Contents
 #         uses: actions/checkout@master
