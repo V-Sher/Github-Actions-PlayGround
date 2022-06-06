@@ -44,6 +44,7 @@ jobs:
         with:
           PROJECT_NAME: "vsher/huggingface"
           RUN_ID: ${{ steps.chatops.outputs.TRAILING_TOKEN }}
+          DISPLAY_METRICS: "['eval/accuracy', 'eval/loss']"
           WANDB_API_KEY: ${{ secrets.WANDB_API_KEY }}
           DEBUG: 'true'
       - name: "Check to see wandb output..."
