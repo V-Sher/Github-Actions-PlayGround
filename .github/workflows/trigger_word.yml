@@ -68,6 +68,15 @@ jobs:
         with:
           name: wandb_report
           path: wandb_report.csv
+          
+      - name: "Download csv artifact"
+        uses: actions/download-artifact@master
+        with:
+          name: my-artifact
+          path: path/to/artifact/world.txt
+      - name: "print in terminal"
+        run: cat path/to/artifact/world.txt
+        
       - name: "Run pwd and ls AGAIN"
         run: ls ${{ github.workspace }}
 
