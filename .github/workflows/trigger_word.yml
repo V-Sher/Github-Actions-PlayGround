@@ -46,20 +46,26 @@ jobs:
       - name: "Check to see wandb output..."
         run: echo '${{ toJSON(steps.wandb) }}'
         shell: bash
+      - name: Upload csv
+        if: steps.wandb.outputs.BOOL_COMPLETE == 'true'
+        uses: actions/upload-artifact@v1
+        with:
+          name: wandb_report
+          path: wandb_report.csv
         
-      - name: Copy Repository Contents
-        uses: actions/checkout@master
+#       - name: Copy Repository Contents
+#         uses: actions/checkout@master
 
-      - name: create deployment
-        if: steps.wandb.outputs.BOOL_SINGLE_RUN
-        run: |
-          pip3 install requests
-          python3 action_files/create_deployment.py
-          # curl -d "{\"ref\": \"$BRANCH_NAME\", \"payload\": {\"wandb_run_id\": \"$RUN_ID\"}}" -H "Authorization: token $TOKEN" https://api.github.com/repos/$GITHUB_REPOSITORY/deployments
-        env:
-          RUN_ID: ${{ steps.chatops.outputs.TRAILING_TOKEN }}
-          BRANCH_NAME: ${{ steps.chatops.outputs.BRANCH_NAME }}
-          TOKEN: ${{ steps.chatops.outputs.APP_INSTALLATION_TOKEN }}
+#       - name: create deployment
+#         if: steps.wandb.outputs.BOOL_SINGLE_RUN
+#         run: |
+#           pip3 install requests
+#           python3 action_files/create_deployment.py
+#           # curl -d "{\"ref\": \"$BRANCH_NAME\", \"payload\": {\"wandb_run_id\": \"$RUN_ID\"}}" -H "Authorization: token $TOKEN" https://api.github.com/repos/$GITHUB_REPOSITORY/deployments
+#         env:
+#           RUN_ID: ${{ steps.chatops.outputs.TRAILING_TOKEN }}
+#           BRANCH_NAME: ${{ steps.chatops.outputs.BRANCH_NAME }}
+#           TOKEN: ${{ steps.chatops.outputs.APP_INSTALLATION_TOKEN }}
         
 #   WandB: 
 #     runs-on: ubuntu-latest
