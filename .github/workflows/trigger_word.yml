@@ -30,6 +30,7 @@ jobs:
         uses: actions/checkout@v3
       - name: "Get the latest SHA for the PR that was commented on"
         id: chatops
+        if: contains(github.event.comment.body, '/get-runs')
         uses: machine-learning-apps/actions-chatops@master
         with:
           TRIGGER_PHRASE: "/get-runs"
@@ -77,30 +78,20 @@ jobs:
       - name: "print in terminal already created artifact"
         run: cat path/to/artifact/world.txt
         
-      - name: "Run pwd and ls AGAIN"
-        run: ls ${{ github.workspace }}
+      - name: "Print csv data"
+        if: steps.wandb.outputs.BOOL_COMPLETE == 'true' && steps.rd.outputs.CONCLUSION == 'success'
+        run: |
+          cd $GITHUB_WORKSPACE
+          sudo apt-get install python3-setuptools
+          pip3 install wheel 
+          pip3 install pandas==0.25.1 tabulate==0.8.5 requests==2.22.0
+          python3 action_files/wandb_results.py
+        env:
+          PR_NUM: ${{ github.event.issue.number }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-#       - name: create deployment
-#         if: steps.wandb.outputs.BOOL_SINGLE_RUN
-#         run: |
-#           pip3 install requests
-#           python3 action_files/create_deployment.py
-#           # curl -d "{\"ref\": \"$BRANCH_NAME\", \"payload\": {\"wandb_run_id\": \"$RUN_ID\"}}" -H "Authorization: token $TOKEN" https://api.github.com/repos/$GITHUB_REPOSITORY/deployments
-#         env:
-#           RUN_ID: ${{ steps.chatops.outputs.TRAILING_TOKEN }}
-#           BRANCH_NAME: ${{ steps.chatops.outputs.BRANCH_NAME }}
-#           TOKEN: ${{ steps.chatops.outputs.APP_INSTALLATION_TOKEN }}
+
+
         
-#   WandB: 
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: "Get Runs Using SHA"
-#         uses: machine-learning-apps/wandb-action@master
-#         with:
-#           PROJECT_NAME: ${{ format('{0}/{1}', secrets.WANDB_ENTITY, secrets.WANDB_PROJECT) }}
-#           FILTER_GITHUB_SHA: ${{ steps.chatops.outputs.SHA }}
-#           BASELINE_TAGS: "['baseline', 'reference']"
-#           DISPLAY_METRICS: "['accuracy', 'loss', 'best_val_acc', 'best_val_loss', '_runtime']"
-#           WANDB_API_KEY: ${{ secrets.WANDB_API_KEY }}
-#           DEBUG: 'true'
+
 
