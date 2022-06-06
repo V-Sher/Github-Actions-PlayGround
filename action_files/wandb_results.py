@@ -41,14 +41,14 @@ result = requests.post(url=url, headers=headers, json=data)
 
 assert result.status_code == 201, f'Data summary did not post to PR successfully, received error code: {result.status_code}'
 
-# Remove Label
-headers = {'Accept': 'application/vnd.github.symmetra-preview+json',
-           'Authorization': f'token {token}'}
-url = f"https://api.github.com/repos/{nwo}/issues/{pr_num}/labels/Full%20Test%20Pending"
+# # Remove Label
+# headers = {'Accept': 'application/vnd.github.symmetra-preview+json',
+#            'Authorization': f'token {token}'}
+# url = f"https://api.github.com/repos/{nwo}/issues/{pr_num}/labels/Full%20Test%20Pending"
 
-result = requests.delete(url=url, headers=headers)
+# result = requests.delete(url=url, headers=headers)
 
-# Add Label
-url = f"https://api.github.com/repos/{nwo}/issues/{pr_num}/labels"
-data = {"labels": ["Full Test Complete"]}
-result = requests.post(url=url, headers=headers, json=data)
+# # Add Label
+# url = f"https://api.github.com/repos/{nwo}/issues/{pr_num}/labels"
+# data = {"labels": ["Full Test Complete"]}
+# result = requests.post(url=url, headers=headers, json=data)
