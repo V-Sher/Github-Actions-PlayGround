@@ -27,7 +27,8 @@ def reformat_df(df):
     clean_df.loc[clean_df.Category == 'candidate'] = clean_df[clean_df.Category == 'candidate'].apply(lambda x: ['**'+str(x)+'**' for x in x.values])
     return clean_df
 
-clean_df = reformat_df(df)
+# clean_df = reformat_df(df)
+clean_df = df
 table = tabulate(clean_df, tablefmt="github", headers="keys", showindex=False)
 message = f"### Model Evaluation Results\n\n{table}\n\nResults queried from W&B project [{entity_name}/{proj_name}]({proj_url})"
 
