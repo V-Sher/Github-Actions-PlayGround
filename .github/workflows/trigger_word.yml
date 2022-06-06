@@ -49,13 +49,17 @@ jobs:
         run: echo '${{ toJSON(steps.wandb) }}'
         shell: bash
       - name: "Run pwd and ls"
-        run: ls ${{ github.workspace }}
+        run: |
+          pwd
+          ls ${{ github.workspace }}
       - name: Upload csv
         if: steps.wandb.outputs.BOOL_COMPLETE == 'true'
         uses: actions/upload-artifact@v3
         with:
           name: wandb_report
           path: ./wandb_report.csv
+      - name: "Run pwd and ls AGAIN"
+        run: ls ${{ github.workspace }}
         
 #       - name: Copy Repository Contents
 #         uses: actions/checkout@master
