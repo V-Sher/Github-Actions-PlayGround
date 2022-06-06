@@ -79,7 +79,7 @@ jobs:
         run: cat path/to/artifact/world.txt
         
       - name: "Print csv data"
-        if: steps.wandb.outputs.BOOL_COMPLETE == 'true' && steps.rd.outputs.CONCLUSION == 'success'
+        if: steps.wandb.outputs.BOOL_COMPLETE == 'true'
         run: |
           cd $GITHUB_WORKSPACE
           sudo apt-get install python3-setuptools
