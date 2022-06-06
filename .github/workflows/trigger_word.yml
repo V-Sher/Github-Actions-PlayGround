@@ -26,6 +26,8 @@ jobs:
   ChatOps:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
       - name: "Get the latest SHA for the PR that was commented on"
         id: chatops
         uses: machine-learning-apps/actions-chatops@master
@@ -47,9 +49,7 @@ jobs:
         run: echo '${{ toJSON(steps.wandb) }}'
         shell: bash
       - name: "Run pwd and ls"
-        run: |
-          pwd
-          ls
+        run: ls ${{ github.workspace }}
       - name: Upload csv
         if: steps.wandb.outputs.BOOL_COMPLETE == 'true'
         uses: actions/upload-artifact@v3
