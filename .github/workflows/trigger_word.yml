@@ -48,7 +48,7 @@ jobs:
         shell: bash
       - name: Upload csv
         if: steps.wandb.outputs.BOOL_COMPLETE == 'true'
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v3
         with:
           name: wandb_report
           path: wandb_report.csv
