@@ -52,12 +52,22 @@ jobs:
         run: |
           pwd
           ls ${{ github.workspace }}
-      - name: Upload csv
-        if: steps.wandb.outputs.BOOL_COMPLETE == 'true'
+      - name: "Testing artifact upload"
+        run: |
+          mkdir -p path/to/artifact
+          echo hello > path/to/artifact/world.txt
+      - name: "Upload dummy artifact"
         uses: actions/upload-artifact@v3
         with:
-          name: wandb_report
-          path: ./wandb_report.csv
+          name: my-artifact
+          path: path/to/artifact/world.txt
+          
+#       - name: Upload csv
+#         if: steps.wandb.outputs.BOOL_COMPLETE == 'true'
+#         uses: actions/upload-artifact@v3
+#         with:
+#           name: wandb_report
+#           path: ./wandb_report.csv
       - name: "Run pwd and ls AGAIN"
         run: ls ${{ github.workspace }}
         
