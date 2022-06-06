@@ -80,18 +80,18 @@ jobs:
         
       - name: "Print csv data"
         if: steps.wandb.outputs.BOOL_COMPLETE == 'true'
+#         run: |
+#           cd $GITHUB_WORKSPACE
+#           python -m pip install --upgrade pip
+#           pip install pandas
+#           python -c "import pandas as pd; print(pd.Series([1,2,3]))"
+
         run: |
           cd $GITHUB_WORKSPACE
           python -m pip install --upgrade pip
-          pip install pandas
-          python -c "import pandas as pd; print(pd.Series([1,2,3]))"
-
-#         run: |
-#           cd $GITHUB_WORKSPACE
-#           sudo apt-get install python3-setuptools
-#           pip3 install wheel 
-#           pip3 install pandas tabulate requests
-#           python3 action_files/wandb_results.py
+          pip install wheel 
+          pip install pandas tabulate requests
+          python action_files/wandb_results.py
         env:
           PR_NUM: ${{ github.event.issue.number }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
