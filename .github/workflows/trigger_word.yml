@@ -62,17 +62,14 @@ jobs:
           name: my-artifact
           path: path/to/artifact/world.txt
           
-#       - name: Upload csv
-#         if: steps.wandb.outputs.BOOL_COMPLETE == 'true'
-#         uses: actions/upload-artifact@v3
-#         with:
-#           name: wandb_report
-#           path: ./wandb_report.csv
+      - name: Upload csv
+        if: steps.wandb.outputs.BOOL_COMPLETE == 'true'
+        uses: actions/upload-artifact@v3
+        with:
+          name: wandb_report
+          path: wandb_report.csv
       - name: "Run pwd and ls AGAIN"
         run: ls ${{ github.workspace }}
-        
-#       - name: Copy Repository Contents
-#         uses: actions/checkout@master
 
 #       - name: create deployment
 #         if: steps.wandb.outputs.BOOL_SINGLE_RUN
