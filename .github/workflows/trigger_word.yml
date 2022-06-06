@@ -46,6 +46,10 @@ jobs:
       - name: "Check to see wandb output..."
         run: echo '${{ toJSON(steps.wandb) }}'
         shell: bash
+      - name: "Run pwd and ls"
+        run: |
+          pwd
+          ls
       - name: Upload csv
         if: steps.wandb.outputs.BOOL_COMPLETE == 'true'
         uses: actions/upload-artifact@v3
