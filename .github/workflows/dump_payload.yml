@@ -1,4 +1,4 @@
-name: Displaying commenter's name under new issue
+name: Dump event payload
 
 on:
   issues:
