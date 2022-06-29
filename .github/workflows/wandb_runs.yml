@@ -27,7 +27,7 @@ jobs:
         id: wandb
         uses: machine-learning-apps/wandb-action@master
         with:
-          PROJECT_NAME: "vsher/huggingface"
+          PROJECT_NAME: "vsher/GithubActionsDemo"
           RUN_ID: ${{ steps.chatops.outputs.TRAILING_TOKEN }}
           BASELINE_TAGS: "['baseline', 'reference']"
           DISPLAY_METRICS: "['eval/accuracy', 'eval/loss']"
