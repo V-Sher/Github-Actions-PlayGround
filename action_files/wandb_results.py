@@ -20,7 +20,7 @@ def reformat_df(df):
     # add links to run id
     df['Run ID'] = df.apply(lambda x: "["+x['run.id']+"]("+x['run.url'] +")", axis=1)
     # remove brackets run tags
-    df['run.tags'] = df['run.tags'].str[0]
+    df['run.tags'] = df['run.tags'].str.get(0)
     # select columns
     clean_df = df[['run.tags', 'Run ID', 'eval/loss', 'eval/accuracy', '_num_train_epochs', '_num_hidden_layers']].round(3)
     # rename columns
