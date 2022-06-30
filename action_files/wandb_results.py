@@ -19,8 +19,10 @@ proj_url = f"https://app.wandb.ai/{entity_name}/{proj_name}"
 def reformat_df(df):
     # add links to run id
     df['Run ID'] = df.apply(lambda x: "["+x['run.id']+"]("+x['run.url'] +")", axis=1)
+    # remove brackets run tags
+    df['run.tags'] = df['run.tags'].str[0]
     # select columns
-    clean_df = df[['__eval.category', 'Run ID', 'eval/loss', 'eval/accuracy', '_num_train_epochs', '_num_hidden_layers']].round(3)
+    clean_df = df[['run.tags', 'Run ID', 'eval/loss', 'eval/accuracy', '_num_train_epochs', '_num_hidden_layers']].round(3)
     # rename columns
     clean_df.columns=['Category', 'Run ID', 'Val Loss', 'Val Acc', 'Epochs', 'Hidden Layers']
     # emphasize candidate runs
