@@ -19,14 +19,14 @@ proj_url = f"https://app.wandb.ai/{entity_name}/{proj_name}"
 def reformat_df(df):
     # add links to run id
     df['Run ID'] = df.apply(lambda x: "["+x['run.id']+"]("+x['run.url'] +")", axis=1)
+    # fix category based on tags
+    df['run.tags'] = df['run.tags'].str.strip('[]')
+    df['run.tags'] = df['run.tags'].str.strip("\'")
+    df['__eval.category'] = ["candidate" if len(tag) == 0  else tag for tag in df['run.tags']] 
     # select columns
-    clean_df = df[['__eval.category', 'Run ID', 'eval/loss', 'eval/accuracy', '_num_train_epochs', '_num_hidden_layers', 'run.tags']].round(3)
-    # rename category
-    clean_df['run.tags'] = clean_df['run.tags'].str.strip('[]')
-    clean_df['run.tags'] = clean_df['run.tags'].str.strip("\'")
-    clean_df['__eval.category'] = ["candidate" if len(tag) == 0  else tag for tag in clean_df['run.tags']] 
+    clean_df = df[['__eval.category', 'Run ID', 'eval/loss', 'eval/accuracy', '_num_train_epochs', '_num_hidden_layers']].round(3)
     # rename columns
-    clean_df.columns=['Category', 'Run ID', 'Val Loss', 'Val Acc', 'Epochs', 'Hidden Layers', 'Tag'] 
+    clean_df.columns=['Category', 'Run ID', 'Val Loss', 'Val Acc', 'Epochs', 'Hidden Layers'] 
     # emphasize candidate runs
     clean_df.loc[clean_df.Category == 'candidate'] = clean_df[clean_df.Category == 'candidate'].apply(lambda x: ['**'+str(x)+'**' for x in x.values])
     return clean_df
