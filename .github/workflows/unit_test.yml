@@ -1,0 +1,33 @@
+name: Running unit tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  Check-Arrays:
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - name: "Step1: Checkout repo"
+        uses: actions/checkout@v3
+      - name: "Step 2: Install requirements file"
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+        if: steps.cache-venv.outputs.cache-hit != 'true'
+      - name: "Step3: Add ./src to PYTHONPATH"
+        id: first_update_step
+        run: |
+          echo "PYTHONPATH=$GITHUB_WORKSPACE/src" >> $GITHUB_ENV
+      - name: "Step 4: Check updated value of PYTHONPATH"
+        id: check_updated_value
+        run: |
+          echo "${{ env.PYTHONPATH }}" # This will output the pythonpath
+      - name: "Step 5: Run tests"
+        run: |
+          python -m pytest ./tests
