@@ -5,3 +5,5 @@
 
 # Github-Actions-PlayGround
 Understanding useful Github Actions for Data Scientist
+
+Associated blog article- https://medium.com/towards-data-science/hands-on-introduction-to-github-actions-for-data-scientists-f422631c9ea7
